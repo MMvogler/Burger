@@ -1,3 +1,86 @@
 {{!-- Setup the index.handlebars to have the template that Handlebars can render onto. --}}
 
 {{!-- Create a button in index.handlebars that will submit the user input into the database. --}}
+
+<h1>Eat-Da-Burger!</h1>
+
+
+{{!-- Ordered burger list that hasn't been eaten yet --}}
+<ul>
+  {{#each burgers}}
+    {{#unless devoured}}
+      {{> burgers/burgers-block devoured=true}}
+    {{/unless}}
+  {{/each}}
+</ul>
+
+
+{{!-- Devoured burger list has been eaten--}}
+<ul>
+  {{#each burgers}}
+    {{#if devoured}}
+      {{> burgers/burgers-block devoured=false}}
+    {{/if}}
+  {{/each}}
+</ul>
+
+<form id="orderBurger" class="button-size">
+  <input type="text" name="id" placeholder="id">
+	<textarea type="text" name="burgerType"></textarea>
+
+    <div class="form-group">
+        <input type="radio" name="eat" value="1" checked><br>
+        <input type="radio" name="eat" value="0"> Devoured!
+    </div>
+
+	<button type="submit">Submit</button>
+</form>
+
+
+
+{{!-- <script type="text/javascript">
+  
+  $("#orderBurger").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    var newMovie = {
+      movie: $("#addmovie [name=movie]").val().trim()
+    };
+
+    // Send the POST request.
+    $.ajax("/api/movies", {
+      type: "POST",
+      data: newMovie
+    }).then(
+      function() {
+        console.log("added new movie");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $("#updatemovie").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    var id = $("[name=id]").val().trim();
+
+    var updatedMovie = {
+      movie: $("#updatemovie [name=movie]").val().trim()
+    };
+
+    // Send the PUT request.
+    $.ajax("/api/movies/" + id, {
+      type: "PUT",
+      data: updatedMovie
+    }).then(
+      function() {
+        console.log("updated id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+</script> --}}

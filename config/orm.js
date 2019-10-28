@@ -1,13 +1,13 @@
 // Import MySQL connection.
 var connection = require("../config/connection.js");
 
-var orm = {};
+var orm = {
 
-selectAll()
+selectAll: function();
 
-insertOne()
+insertOne: function();
 
-updateOne()
+updateOne: function();
 
-
+};
 module.exports = orm;
