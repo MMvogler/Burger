@@ -8,22 +8,23 @@ var router = express.Router();
 
 router.get("/", function(req, res) {
     burger.selectAll(function(data) {
-      var hbsObject = {
-        burgers: data
-      };
-      console.log(hbsObject);
-      res.render("index", hbsObject);
+      // var hbsObject = {
+      //   burgers: data
+      // };
+      // console.log(hbsObject, "test");
+      res.render("index", {burgers:data});
     });
   });
   
   router.post("/api/burgers", function(req, res) {
+    // console.log(req.body.burger_name);
     burger.insertOne([
       "burger_name", "devoured"
     ], [
-      req.body.burger_name, req.body.devoured
+      req.body.burger_name, false
     ], function(result) {
       // Send back the ID of the new quote
-      res.json({ id: result.insertId });
+      res.redirect("/");
     });
   });
   

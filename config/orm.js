@@ -2,14 +2,13 @@
 var connection = require("../config/connection.js");
 
 function printQmarks(num) {
-
     var arr = [];
-
-    for(var i = 0; i < num; i++) {
-        arr.push("?");
+    for (var i = 0; i < num; i++) {
+      arr.push("?");
     }
     return arr.toString();
 }
+  
 
 function objToSql(ob) {
 
@@ -43,12 +42,19 @@ var orm = {
     },
 
     insertOne: function(table, cols, vals, cb) {
-        var queryString = "INSERT INTO " + table + " (" + cols.toString() + 
-        ") " + "VALUES (" + printQmarks(vals.length) + ") ";
+        var queryString = "INSERT INTO " + table;
+        queryString += " (";
+        queryString += cols.toString();
+        queryString += ") ";
+        queryString += "VALUES (";
+        queryString += printQmarks(vals.length);
+        queryString += ") ";
 
         console.log(queryString);
 
-        connection.query(queryString, function(err, result) {
+            
+
+        connection.query(queryString, vals, function(err, result) {
             if (err) {
                 throw err;
             }

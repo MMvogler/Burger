@@ -4,40 +4,40 @@
   <p>Enter a burger you want to eat, then click the "Submit" button.</p>
 </div>
 
-{{!-- <ul>
-  {{#each burgers}}
-    {{#unless devoured}}
-      {{> burgers/burger-block devoured=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
 
-<ul>
-  {{#each devoured}}
+  
+
+
+
+  {{!-- {{#each devoured}}
     {{#if sleepy}}
       {{> burgers/burger-block devoured=false}}
     {{/if}}
-  {{/each}}
-</ul> --}}
+  {{/each}} --}}
+
 
 
 
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      One of three columns
+     {{#each burgers}}
+    {{#unless devoured}}
+      <div>
+        <h3>{{id}}.{{burger_name}}</h3>
+        <form>
+          <input type="hidden" class="burger_id" type="text" value={{this.id}}> 
+          <button id="eatBurger">Devour!</button>
+        </form>
+        
+      </div>
+    {{/unless}}
+  {{/each}}
     </div>
     <div class="col-sm-4">
-      <form id="orderBurger" class="button-size">
-	      <textarea type="text" name="burgerType"></textarea>
+      <form action="/api/burgers" method="POST" id="orderBurger" class="button-size">
+	      <input type="text" name="burger_name" val="" id="enter_text"></input>
 	      <button type="submit" id="newBurger">Submit</button>
-
-        <div>
-          {{!-- <input type="radio" name="eat" value="1">
-          <input type="radio" name="eat" value="0">  --}}
-          <button type="submit" id="eatBurger">Devour!</button>
-        </div>
-
       </form>
     </div>
     <div class="col-sm-4">
@@ -51,35 +51,15 @@
 {{!-- AJAX --}}
 <script type="text/javascript">
 
-{{!-- Button for ordering burger --}}
-  $("#newBurger").on("submit", function(event) {
-    event.preventDefault();
-
-    var createNewBurger = {
-      burger_name: $("#orderBurger").val().trim()
-    };
-
-    // Send the POST request.
-    $.ajax("/api/burgers", {
-      type: "POST",
-      data: createNewBurger
-    }).then(
-      function() {
-        console.log("added new burger");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-
 {{!-- Button to eat burger --}}
   $("#eatBurger").on("click", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
+    console.log($(this));
+    {{!-- var id = $("id").val().trim(); --}}
 
-    var id = $("[name=id]").val().trim();
 
-    var updateList = {
+   {{!-- var updateList = {
       movie: $("#eatBurger").val().trim()
     };
 
@@ -93,6 +73,6 @@
         // Reload the page to get the updated list
         location.reload();
       }
-    );
+    ); --}}
   });
 </script>
