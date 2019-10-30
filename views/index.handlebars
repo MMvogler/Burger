@@ -4,6 +4,24 @@
   <p>Enter a burger you want to eat, then click the "Submit" button.</p>
 </div>
 
+{{!-- <ul>
+  {{#each burgers}}
+    {{#unless devoured}}
+      {{> burgers/burger-block devoured=true}}
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<ul>
+  {{#each devoured}}
+    {{#if sleepy}}
+      {{> burgers/burger-block devoured=false}}
+    {{/if}}
+  {{/each}}
+</ul> --}}
+
+
+
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
@@ -11,7 +29,6 @@
     </div>
     <div class="col-sm-4">
       <form id="orderBurger" class="button-size">
-        <input type="text" name="id" placeholder="id">
 	      <textarea type="text" name="burgerType"></textarea>
 	      <button type="submit" id="newBurger">Submit</button>
 
