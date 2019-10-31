@@ -4,30 +4,16 @@
   <p>Enter a burger you want to eat, then click the "Submit" button.</p>
 </div>
 
-
-  
-
-
-
-  {{!-- {{#each devoured}}
-    {{#if sleepy}}
-      {{> burgers/burger-block devoured=false}}
-    {{/if}}
-  {{/each}} --}}
-
-
-
-
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
      {{#each burgers}}
-    {{#unless devoured}}
+        {{#unless this.devoured}}
       <div>
-        <h3>{{id}}.{{burger_name}}</h3>
-        <form>
+        <h3>{{this.id}}.{{this.burger_name}}</h3>
+        <form action="/api/burgers" method="PUT" id="devourIt" class="button-size">
           <input type="hidden" class="burger_id" type="text" value={{this.id}}> 
-          <button id="eatBurger">Devour!</button>
+          <button id="eatBurger">Devour It!</button>
         </form>
         
       </div>
@@ -41,7 +27,7 @@
       </form>
     </div>
     <div class="col-sm-4">
-      One of three columns
+      
     </div>
   </div>
 </div>
@@ -56,11 +42,11 @@
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
     console.log($(this));
-    {{!-- var id = $("id").val().trim(); --}}
+    var id = $("id").val().trim();
 
 
-   {{!-- var updateList = {
-      movie: $("#eatBurger").val().trim()
+   var updateList = {
+      burgers: $("#eatBurger").val().trim()
     };
 
     // Send the PUT request.
@@ -73,6 +59,6 @@
         // Reload the page to get the updated list
         location.reload();
       }
-    ); --}}
+    );
   });
 </script>
